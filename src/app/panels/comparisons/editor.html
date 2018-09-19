@@ -1,0 +1,28 @@
+<div class="row-fluid">
+    <div class="span4" >
+        <label class="medium">Data Source<tip>Specify the data source</tip></label>
+        <select class="input-medium" ng-model="panel.selectedDataSource"
+                ng-options="f for f in panel.dataSourceList"
+                ng-change='set_refresh(true)'>
+        </select>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span10">
+        <label class="small">Compare Fields
+            <tip>This is the facet field.</tip>
+        </label>
+
+        <input type="text" class="input-small" bs-typeahead="fields.list"
+               ng-model="panel.field1" ng-change="set_refresh(true)" />&nbsp;Compared by&nbsp;
+        <input type="text" class="input-small" bs-typeahead="fields.list"
+               ng-model="panel.field2" ng-change="set_refresh(true)" />
+    </div>
+    <div class="span10">
+        <label class="small">Number of Bars
+            <tip>Specify a maximum number of terms/Bars to display.</tip>
+        </label>
+        <input class="input-small" type="number" ng-model="panel.size" ng-change="set_refresh(true)">
+    </div>
+</div>

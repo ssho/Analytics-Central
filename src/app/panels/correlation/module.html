@@ -1,0 +1,41 @@
+<div ng-controller="correlation" ng-init="init()">
+    <style>
+        .domain,
+        .tick line,
+        .axis path,
+        .axis line,
+        .axis1 path,
+        .axis1 line {
+        fill: none;
+        #stroke: #E6E7E8;
+        stroke: #000;
+        #shape-rendering: crispEdges;
+        }
+        .tick text {
+           font-size: 10px;
+        }
+
+        .marker.client .marker-bg,
+        .marker.client path {
+        fill: rgba(255, 127, 0, 0.8);
+        stroke: rgba(255, 127, 0, 0.8);
+        stroke-width: 0.5;
+        }
+
+        .d3-tip {
+        line-height: 1;
+        font-weight: bold;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border-radius: 2px;
+        }
+
+    </style>
+    <div class="row-fluid">
+        <div class="span3 dataSourceText">Data Source: {{panel.selectedDataSource.name}}</div>
+        <div class="span3 dataSourceText">Data Type: {{panel.selectedDataType}}</div>
+
+    </div>
+    <correlation-chart></correlation-chart>
+</div>

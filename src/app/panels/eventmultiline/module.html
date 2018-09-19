@@ -1,0 +1,46 @@
+<div ng-controller="eventmultiline" ng-init="init()">
+    <style>
+       
+        .hover-line {
+        stroke: #E6E7E8;
+        fill: none;
+        stroke-width: 1px;
+        left: 10px;
+        shape-rendering: crispEdges;
+        opacity: 0.000001;
+        }
+
+        .hover-text {
+        stroke: none;
+        font-size: 30px;
+        font-weight: bold;
+        fill: #000000;
+        }
+
+        .tooltip {
+        font-weight: normal;
+        opacity:0.5;
+        }
+
+        .brush .extent {
+        stroke: #900c3f;
+        shape-rendering: crispEdges;
+        fill:#900c3f
+        }
+
+     
+        .d3-tip {
+        line-height: 1;
+        font-weight: bold;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border-radius: 2px;
+        }
+    </style>
+    <div class="row-fluid">
+        <div class="span3 dataSourceText">Data Source: {{panel.selectedDataSource.name}}</div>
+        <div class="span3 dataSourceText">Data Type: {{panel.selectedDataType}}</div>
+    </div>
+    <eventmultiline-chart></eventmultiline-chart>
+</div>

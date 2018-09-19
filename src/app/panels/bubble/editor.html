@@ -1,0 +1,27 @@
+<div class="row-fluid">
+  <div class="span3">
+      <label class="medium">Data Source<tip>Specify the data source</tip></label>
+       <select class="input-medium" ng-model="panel.selectedDataSource"
+            ng-options="f for f in panel.dataSourceList"
+            ng-change='set_refresh(true)'>
+       </select>
+  </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span3">
+        <label class="small">Field for displaying values <tip>Specify a field to show values on the bubble chart</tip></label>
+        <input type="text" class="input-small" bs-typeahead="fields.list" ng-model="panel.field" ng-change="set_refresh(true)">
+    </div>
+    <div class="span2">
+        <label class="small">Number of Rows <tip>Specify a number of rows to retrieve the result set.</tip></label>
+        <input class="input-small" type="number" ng-model="panel.max_rows" ng-change="set_refresh(true)">
+    </div>
+    <div class="span2">
+        <label class="small">Font Scale
+            <tip> Increase the size of the word font</tip>
+        </label>
+        <select class="input-small" ng-model="panel.fontScale" ng-options="f for f in [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]"></select>
+        </span>
+    </div>
+</div>

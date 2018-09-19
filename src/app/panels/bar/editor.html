@@ -1,0 +1,35 @@
+<div class="row-fluid">
+    <div class="span3">
+        <label class="medium">Data Source
+            <tip>Specify the data source</tip>
+        </label>
+        <select class="input-medium" ng-model="panel.selectedDataSource"
+                ng-options="solrCollectionDataType as solrCollectionDataType.name for solrCollectionDataType in solrCollectionDataTypes"
+                ng-change='set_refresh(true)'>
+        </select>
+    </div>
+    <div class="span3">
+        <div ng-if="panel.selectedDataSource.options">
+            <label class="medium">Data Type
+                <tip>Specify the data type</tip>
+            </label>
+            <select class="input-medium" ng-model="panel.selectedDataType"
+                    ng-options="o as o for o in panel.selectedDataSource.options"
+                    ng-change='set_refresh(true)'>
+            </select>
+        </div>
+    </div>
+    <div class="span4">
+        <label class="small">Field
+            <tip>This is the facet field.</tip>
+        </label>
+        <input type="text" class="input-small" bs-typeahead="fields.list" ng-model="panel.field"
+               ng-change="set_refresh(true)">
+    </div>
+    <div class="span4">
+        <label class="small">Number of Bars
+            <tip>Specify a maximum number of terms/Bars to display.</tip>
+        </label>
+        <input class="input-small" type="number" ng-model="panel.size" ng-change="set_refresh(true)">
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div ng-controller="multiline" ng-init="init()">
+    <style>
+        
+        .hover-line {
+        stroke: #E6E7E8;
+        fill: none;
+        stroke-width: 1px;
+        left: 10px;
+        shape-rendering: crispEdges;
+        opacity: 0.000001;
+        }
+
+        .hover-text {
+        stroke: none;
+        font-size: 30px;
+        font-weight: bold;
+        fill: #000000;
+        }
+
+        .tooltip {
+        font-weight: normal;
+        opacity:0.5;
+        }
+
+        .brush .extent {
+        stroke: #FFF;
+        shape-rendering: crispEdges;
+        }
+
+
+    </style>
+    <div class="row-fluid">
+        <div class="span3 dataSourceText">Data source: {{panel.selectedDataSource.name}}</div>
+        <div class="span3 dataSourceText">Data source: {{panel.selectedDataType}}</div>
+    </div>
+    <multiline-chart></multiline-chart>
+</div>

@@ -1,0 +1,10 @@
+<div ng-controller="costperformance" ng-init="init()">
+    <div class="row-fluid">
+        <div class="span3 dataSourceText">Data Source: {{panel.selectedDataSource.name}}</div>
+        <div class="span3 dataSourceText">Data Type: {{panel.selectedDataType}}</div>
+        <div class="span2 dataSourceText">Start Date: {{panel.user_input_start_date}}</div>
+        <div class="span2 dataSourceText">End Date: {{panel.user_input_end_date}}</div>
+        <div class="span2 dataSourceText">Cost ($): {{panel.user_input_amount.toLocaleString()}}</div>
+    </div>
+    <costperformance-chart></costperformance-chart>
+</div>

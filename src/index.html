@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+    <!-- Testing -->
+  <!--[if IE 8]><html class="no-js lt-ie9" lang="en"><![endif]-->
+  <!--[if gt IE 8]> <html class="no-js" lang="en"> <![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
+    <link id="favicon" rel="shortcut icon" type="image/ico" href="img/favicon.ico">
+    <title>ICCA</title>
+
+    <!-- load the root require context -->
+    
+    <!--<script src="vendor/html2canvas.js"></script>
+    <script src="vendor/html2canvas.svg.js"></script>-->
+    <script src="vendor/require/require.js"></script>
+    <script src="app/components/require.config.js"></script>
+    <script>require(['app'], function () {})</script>
+    <style>
+    </style>
+
+  </head>
+
+  <!--body ng-cloak-->
+  <body ng-cloak>
+
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="css/bootstrap.light.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/app.min.css">
+
+    <div ng-cloak ng-repeat='alert in dashAlerts.list' class="alert-{{alert.severity}} dashboard-notice" ng-show="$last" style="position:fixed">
+        <a type="button" class="alert alert-danger" ng-click="dashAlerts.clear(alert)" style="padding-right:50px" href="#" aria-label="close">&times;</a>
+        <strong>{{alert.title}}</strong>
+        <span ng-bind-html-unsafe='alert.text'></span>
+        <div style="padding-right:10px" class='pull-right small'> {{$index + 1}} alert(s) </div>
+    </div>
+
+    <!-- Navigator Bar -->
+    <div class="navbar navbar-default" ng-cloak>
+        <div class="container-fluid hidden-phone">
+            <div class="row">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#{{$root.userDefaultHome}}">
+                        <img src="img/BBG_LOGO_white.png" data-placement="bottom" alt="BBG Logo" class="bbg-logo"/>
+                        <title class="navbar-brand-title">Broadcasting Board of Governors</title>
+                        <!--<img src="img/logo-agency-square.png" data-placement="bottom" alt="BBG Logo" class="bbg-logo" />-->
+                    </a>
+                    <ul class="nav navbar-nav navbar-right" >
+                        <li ng-show="$root.authenticated" ng-repeat="menu in menuList | orderBy:'order' ">
+                           <a class="main_menu" ng-class="$root.checkMenuItemActive(menu.item)" href="{{menu.url}}">{{menu.item}}</a>
+                        </li>
+                        <li ng-show="$root.authenticated"  class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello, {{currentUser}}
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a class="dropdown-item" href="#/changePassword">Change Password</a></li>
+                                <li><a class="dropdown-item" href="#/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid visible-phone">
+            <div class="row">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main_menu" aria-expanded="true">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/logout">
+                        <img src="img/logo-agency-square.png" data-placement="bottom" alt="BBG Logo" class="bbg-logo" />
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="main_menu">
+                    <ul class="list-block text-center">
+                        <li ng-show="$root.authenticated" ng-repeat="menu in menuList | orderBy:'order' ">
+                            <a type="button" ng-class="$root.checkMenuItemActive(menu.item)" href="{{menu.url}}">{{menu.item}}</a>
+                        </li>
+                        <li ng-show="$root.authenticated">
+                            <li><a class="main_menu" href="#/logout">Logout</a></li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Page Body-->
+    <div class="page_body">
+        <div class="main">
+            <div ng-view></div>
+        </div>
+    </div>
+    <!-- Sticky Footer -->
+    <footer class="full_footer">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="footer_left_content_mobile visible-phone hidden-desktop">
+                        <img src="img/logo_small_50x50.png" alt="WSI_logo_footer" class="WSI_logo_footer">
+                        <br /><strong>Washington Software, Inc.</strong><br/>
+                        <a class="emailto" href="mailto:support@wasoftware.org"><small>support@wasoftware.org</small></a>
+                    </div>
+                    <div class="footer_right_content_mobile visible-phone hidden-desktop">
+                        <ul class="list-inline text-left">
+                            <li><a href="https://www.facebook.com/BBGgov/"><i class="fa fa-lg fa-facebook-f" aria-label="Right Align"></i></a></li>
+                            <li><a href="https://twitter.com/BBGgov"><i class="fa fa-lg fa-twitter" aria-label="Right Align"></i></a></li>
+                            <li><a href="https://www.youtube.com/user/bbgtunein"><i class="fa fa-lg fa-youtube" aria-label="Right Align"></i></a></li>
+                            <li><a href="https://www.bbg.gov/category/press-release/feed/"><i class="fa fa-lg fa-feed" aria-label="Right Align"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="footer_left_content pull-left visible-desktop hidden-phone">
+                        <img src="img/logo_small_50x50.png" alt="WSI_logo_footer" class="WSI_logo_footer">
+                        <br /><strong>Washington Software, Inc.</strong><br/>
+                        <a class="emailto" href="mailto:support@wasoftware.org"><small>support@wasoftware.org</small></a>
+                    </div>
+                    <div class="footer_right_content pull-right visible-desktop hidden-phone">
+                        <ul class="list-inline text-right">
+                            <li><a href="https://www.facebook.com/BBGgov/"><i class="fa fa-lg fa-facebook-f" aria-label="Right Align"></i></a></li>
+                            <li><a href="https://twitter.com/BBGgov"><i class="fa fa-lg fa-twitter" aria-label="Right Align"></i></a></li>
+                            <li><a href="https://www.youtube.com/user/bbgtunein"><i class="fa fa-lg fa-youtube" aria-label="Right Align"></i></a></li>
+                            <li><a href="https://www.bbg.gov/category/press-release/feed/"><i class="fa fa-lg fa-feed" aria-label="Right Align"></i></a></li>
+                        </ul>
+                        <p class="text-right">
+                            <strong>Contact the BBG</strong><br/>
+                            <small>330 Independence Avenue, SW<br/>
+                                Washington, DC 20237<br/>
+                                (202) 203-4000<br/>
+                                <a class="emailto" href="mailto:publicaffairs@bbg.gov">publicaffairs@bbg.gov</a></small>
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+<script>
+    function printDiv(inputDiv){
+        console.log("clicked print button" + inputDiv);
+        html2canvas(document.getElementById(inputDiv),{
+              onrendered: function (canvas){
+                 var img = canvas.toDataURL();
+                 window.open(img);
+              }
+        });
+
+    };
+    function printBody(){
+        //console.log("clicked print button" + inputDiv);
+        html2canvas($('body'),{
+              onrendered: function (canvas){
+                 var img = canvas.toDataURL();
+                 window.open(img);
+              }
+        });
+    };
+
+
+</script>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+<div ng-controller='tagcloud' ng-init="init()">
+   <div class="row-fluid">
+       <div class="span3 dataSourceText">Data Source: {{panel.selectedDataSource.name}}</div>
+       <div class="span3 dataSourceText">Data Type: {{panel.selectedDataType}}</div>
+   </div>
+    <div tagcloud-chart style="overflow:hidden; position:relative"></div>
+</div>

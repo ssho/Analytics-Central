@@ -1,0 +1,55 @@
+<div class="row-fluid">
+    <!--
+    <div class="span3">
+        <label class="small">Time Field<tip>Specify the time field</tip></label>
+        <input type="text" class="input-small" bs-typeahead="fields.list" ng-model="panel.field" ng-change="set_refresh(true)">
+    </div>
+    -->
+<!--    <div class="span3">
+      <label class="medium">Data Source<tip>Specify the data source</tip></label>
+      <select class="input-medium" ng-model="panel.selectedDataSource"
+            ng-options="f for f in panel.dataSourceList"
+            ng-change='set_refresh(true)'>
+      </select>
+    </div>
+    <div class="span3">
+        <label class="medium">Data Type<tip>Specify the chart type</tip></label>
+        <select class="input-medium" ng-model="panel.selectedChartType"
+                ng-options="f for f in ['Page hit','Page visit','Traffic volume']"
+                ng-change='set_refresh(true)'>
+        </select>l
+    </div>-->
+    <div class="span3">
+        <label class="medium">Data Source <tip>Specify the data source</tip></label>
+        <select class="input-medium" ng-model="panel.selectedDataSource"
+                ng-options="solrCollectionDataType as solrCollectionDataType.name for solrCollectionDataType in solrCollectionDataTypes"
+                ng-change='set_refresh(true)'>
+        </select>
+    </div>
+    <div class="span3">
+        <div ng-if="panel.selectedDataSource.options">
+            <label class="medium">Data Type <tip>Specify the data type</tip></label>
+            <select class="input-medium" ng-model="panel.selectedDataType"
+                    ng-options="o as o for o in panel.selectedDataSource.options"
+                    ng-change='set_refresh(true)'>
+            </select>
+        </div>
+    </div>
+
+</div>
+<h5>Please enter project cost and the start date and end date.</h5>
+<div class="row-fluid">
+    <div class="span4">
+        <label class="small">Project Start Date&nbsp;<tip>Specify the project start date.</tip></label>
+        <input type="date" class="input-medium"  value="panel.user_input_start_date" ng-model="panel.user_input_start_date" ng-change="set_refresh(true)">
+    </div>
+    <div class="span4">
+        <label class="small">Project End Date&nbsp;<tip>Specify the project end date.</tip></label>
+        <input class="input-medium" type="date" ng-model="panel.user_input_end_date" ng-change="set_refresh(true)">
+    </div>
+    <div class="span3">
+        <label class="small">Project Cost($)&nbsp;<tip>Specify the project cost.</tip></label>
+        <input class="input-medium" min="0" type="number" ng-model="panel.user_input_amount" ng-change="set_refresh(true)">
+    </div>
+</div>
+

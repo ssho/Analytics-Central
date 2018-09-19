@@ -1,0 +1,64 @@
+<div ng-controller="relationship" ng-init="init()">
+    <style>
+        body {
+        font-family: "Lucida Grande", "Droid Sans", Arial, Helvetica, sans-serif;
+        }
+
+        .legend {
+        border: 1px solid #555555;
+        border-radius: 5px 5px 5px 5px;
+        font-size: 0.8em;
+        margin: 10px;
+        padding: 8px;
+        }
+
+        .bld {
+        font-weight: bold;
+        }
+
+        .link {
+        fill: none;
+        stroke: #666;
+        stroke-width: 1.5px;
+        }
+
+        #licensing {
+        fill: green;
+        }
+
+        .link.licensing {
+        stroke: green;
+        }
+
+        .link.resolved {
+        stroke-dasharray: 0, 2 1;
+        }
+
+        circle {
+        fill: #dce9be;
+        stroke: #333;
+        stroke-width: 1.5px;
+        }
+
+        text {
+        font: 10px sans-serif;
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+        }
+
+        .text1 {
+        fill: #000;
+        font: 14px sans-serif;
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+        }
+
+        .text2 {
+        fill: #f00;
+        font: 18px sans-serif;
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+        }
+    </style>
+    <relationship-chart></relationship-chart>
+</div>

@@ -1,0 +1,27 @@
+<div class="row-fluid">  
+    <div class="span3">
+        <label class="medium">Data Source <tip>Specify the data source</tip></label>
+        <select class="input-medium" ng-model="panel.selectedDataSource"
+                ng-options="solrCollectionDataType as solrCollectionDataType.name for solrCollectionDataType in solrCollectionDataTypes"
+                ng-change='set_refresh(true)'>
+        </select>
+    </div>
+    <div class="span3">
+        <div ng-if="panel.selectedDataSource.options">
+            <label class="medium">Data Type <tip>Specify the data type</tip></label>
+            <select class="input-medium" ng-model="panel.selectedDataType"
+                    ng-options="o as o for o in panel.selectedDataSource.options"
+                    ng-change='set_refresh(true)'>
+            </select>
+        </div>
+    </div>
+    <div class="span3">
+        <label class="small">Field for displaying values <tip>Specify a field to show values on the multiline chart</tip></label>
+        <input type="text" class="input-small" bs-typeahead="fields.list" ng-model="panel.field" ng-change="set_refresh(true)">
+    </div>
+    <div class="span2">
+        <label class="small">Number of Rows <tip>Specify a number of rows to retrieve the result set.</tip></label>
+        <input class="input-small" type="number" ng-model="panel.max_rows" ng-change="set_refresh(true)">
+    </div>
+  
+</div>

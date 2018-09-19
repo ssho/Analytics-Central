@@ -1,0 +1,104 @@
+<style>
+    div.scroll3 {
+    width:100%;
+    overflow-y:scroll;
+    height:200px;
+    }
+</style>
+<!-- This file is responsible for nav bar of the dashboard -->
+<!--
+<li class="dropdown" bs-tooltip="'Collections'" data-placement="bottom" style="padding-top:5px;"
+    ng-show="dashboard.current.loader.dropdown_collections"><select class="span2"
+    ng-model="dashboard.current.solr.core_name" ng-change="dashboard.refresh()"
+    ng-options="c as c for c in dashboard.current.solr.core_list"></select></li>-->
+
+<li bs-tooltip="'Set current dashboard as default dashboard'" data-placement="bottom">
+    <a class="main_menu" ng-click="dashboard.setAsDefaultDashboard()"> Set as default </a>
+</li>
+<!-- Load menu -->
+<li class="dropdown" bs-tooltip="'Load dashboard'" data-placement="bottom" ng-show="showDropdown('load')" >
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" ng-click="elasticsearch_dblist('title:'+elasticsearch.query+'*')">
+    <i class='icon-folder-open'></i>
+  </a>
+  <ul class="dropdown-menu" style="padding:10px;z-index:1001;min-width:250px">
+    <li ng-show='dashboard.current.loader.load_local'>
+          <h5>Load Dashboard <tip>Load dashboard layout from server</tip></h5>
+          <div class="scroll3">
+         <table width="100%" ng-show="dashboard.current.showUserDashboardList">
+              <thead><tr><td><strong>User Dashboard</strong></td></tr></thead>
+              <tbody>
+              <tr ng-repeat="item in dashboard.current.userDashboardList | orderBy:'dashboardName' ">
+                  <td><a class="noUnderLine" ng-click="load_dashboard(item)">&nbsp;&nbsp;&nbsp;{{item.dashboardName }}</a></td>
+                  <!--<td><div style="white-space: nowrap;">{{item.date | date:"MM-dd-yyyy"}}</div></td>-->
+              </tr>
+              </tbody>
+              <thead><tr><td><hr/></td></tr></thead>
+          </table>
+          <table width="100%">
+                  <thead><tr><td><strong>System Dashboard</strong></td></tr></thead>
+                  <tbody>
+                  <tr ng-repeat="item in dashboard.current.systemDashboardList | orderBy:'-date' ">
+
+                      <td><a class="noUnderLine" ng-click="load_dashboard(item)">&nbsp;&nbsp;&nbsp;{{item.dashboardName }}</a></td>
+                      <!--<td><div style="white-space: nowrap;">{{item.date | date:"MM-dd-yyyy"}}</div></td>-->
+                  </tr>
+                  </tbody>
+          </table>
+          </div>
+    </li>
+
+  </ul>
+</li>
+<!-- Save menu -->
+<li class="dropdown" bs-tooltip="'Save dashboard'" data-placement="bottom" ng-show="showDropdown('save')">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <i class='icon-save'></i>
+  </a>
+  <ul class="dropdown-menu" style="padding:10px">
+    <li ng-show="dashboard.current.loader.save_default || dashboard.current.loader.save_local">
+      <!--<h5>Locally</h5>-->
+      <ul class="unstyled">
+          <li ng-show="dashboard.current.loader.save_local">
+              <a class="link" ng-click="dashboard.to_file()"><i class="icon-download"></i> Export to File</a>
+              <tip>Export layout, not data, to file</tip></li>
+
+          <li ng-show="dashboard.current.loader.save_local">
+              <a class="link" bs-modal="'app/partials/saveToServerSetting.html'" ><i class="icon-save"></i> Save to Server</a>
+              <tip>Save layout, not data, to server</tip></li>
+          <!--
+          <li ng-show="dashboard.current.loader.save_default"><a class="link" ng-click="set_default()"><i class="icon-bookmark"></i> Set as Browser Default</a> <tip>Store dashboard preference to browser's localStorage</tip></li>
+          <li ng-show="dashboard.current.loader.save_default"><a class="link" ng-click="purge_default()"><i class="icon-ban-circle"></i> Clear Browser Default</a></li>
+          -->
+      </ul>
+    </li>
+    <!--
+    <li ng-show="dashboard.current.loader.save_gist">
+      <h6>Gist</h6>
+      <form class="input-append">
+        <input class='input-medium' placeholder='Title' type="text" ng-model="gist.title"/>
+        <button class="btn" ng-click="save_gist()"><i class="icon-github-alt"></i></button>
+      </form><br>
+      <small ng-show="gist.last">Last gist: <a target="_blank" href="{{gist.last}}">{{gist.last}}</a></small>
+    </li>
+
+    <li ng-show="dashboard.current.loader.save_elasticsearch">
+      <h5>Solr</h5>
+      <form class="input-append">
+        <input class='input-medium' placeholder="{{dashboard.current.title}}" type="text" ng-model="elasticsearch.title"/>
+        <button class="btn" ng-click="elasticsearch_save('dashboard', null)"><i class="icon-save"></i></button>
+      </form>
+    </li>
+    -->
+  </ul>
+</li>
+<!-- Configure menu -->
+<li ng-show="dashboard.current.editable" bs-tooltip="'Configure dashboard'" data-placement="bottom">
+    <a class="main_menu" href='#' bs-modal="'app/partials/dasheditor.html'">
+        <i class='icon-cog pointer'></i>
+    </a>
+</li>
+<!--
+<li bs-tooltip="'Print dashboard'" data-placement="bottom">
+    <a class="main_menu" ng-href=""><i class='icon-print pointer' onclick="printBody()"></i></a>
+</li>
+-->

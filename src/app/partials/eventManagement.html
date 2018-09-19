@@ -1,0 +1,111 @@
+<div class="container-fluid">
+    <form ng-submit="eventInsert()" ng-controller="eventManagementCtrl" class="">
+        
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"></div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <h2 class="form-title">Event Management</h2>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"></div>
+        </div>
+        <div ng-show="hasErrorMessage">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center"></div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center">
+                    <div class="alert alert-danger text-center">{{errorMessage}}</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center"></div>
+            </div>
+        </div>
+         <div ng-show="hasMessage">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center"></div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center">
+                    <div class="alert alert-success text-center">{{Message}}</div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center">
+                <label>Event Name</label>
+                <input class="form-control" type="text" placeholder="Event Name"
+                       name="eventName" maxlength="50" ng-model="eventName" autofocus required/>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center"></div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center">
+                <label>Event Date</label>
+                <input class="form-control" type="date" placeholder="Event Date"
+                       name="eventDate" ng-model="eventDate" required/>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center"></div>
+        </div>
+        <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center"></div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-center">
+                    <input type="submit" id="add" value="Add a New Event" class="btn btn-primary btn-md btn-block"/>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 text-center"></div>
+        </div>
+        <div class="row">
+           <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 text-center"></div>
+           <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 text-left">
+                    <label data-tooltip="Type text to search from events" data-tooltip-placement="right">Search</label>
+                    <input type="text" ng-model="search" class="form-control" placeholder="Search">
+           </div>
+           <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 text-center"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 text-center"></div>
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 text-right">
+            <button type="button" class="btn btn-outline-primary" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+               Previous
+            </button>
+            {{currentPage+1}}/{{numberOfPages()}}
+            <button type="button" class="btn btn-outline-primary" ng-disabled="currentPage >= events.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+               Next
+            </button>  
+        </div>
+            <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 text-center"></div>  
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 text-center"></div>
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 text-center">
+            <table class="table table-striped table-hover">
+                 <thead>
+                    <tr>                                    
+                       <th style="width:10%">
+                           <span ng-click="sort('date')">Date</span>
+                           <i ng-show="sortKey=='date'" ng-class="{'icon-chevron-up':!reverse,'icon-chevron-down':reverse}"></i>
+                       </th>
+                       <th >
+                           <span ng-click="sort('name')">Event</span>
+                           <i ng-show="sortKey=='name'" ng-class="{'icon-chevron-up':!reverse,'icon-chevron-down':reverse}"></i>                          
+                       </th>
+                       <th style="width:10%">Action</th>                             
+                    </tr>
+                 </thead>
+                 <tbody>
+                       <tr ng-repeat="event in events|orderBy:sortKey:reverse|filter:search|startFrom:currentPage*pageSize|limitTo:pageSize">
+                            <td>{{event.date}}</td>
+                            <td>{{event.name}}</td>
+                            <td><i class="pointer icon-pencil" ng-click="eventEdit(event)" 
+                                 ng-href="#" bs-modal="'app/partials/eventEditor.html'" 
+                                 ></i>&nbsp;&nbsp;&nbsp; 
+                                <i class="pointer icon-trash"  ng-click="eventDelete(event.id)"></i>
+                            </td>                                   
+                       </tr>
+                 </tbody>
+            </table> 
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 text-center"></div>
+        </div>
+    </form>
+</div>
+
+
